@@ -1,0 +1,173 @@
+# vim: set syntax=conf
+#
+# ASIC Hub Configuration
+#
+# See https://hiveon.com/knowledge-base/ASIC-Hub/ for more info.
+#
+
+# API URL
+#APIUrl = "http://api.hiveos.farm"
+
+# Dashboard URL
+#HiveWebUrl = "https://the.hiveos.farm"
+
+# Application Update Server URL
+#UpdateServer = "https://download.hiveos.farm/hub"
+
+# Max OS threads count (default is CPU cores count)
+#MaxThreads=8
+
+# Directory for temporary files (download cache, etc)
+#
+# Default is OS temp directory
+#TempDir = "/tmp"
+
+[HTTP]
+# HTTP server listen address
+Listen = ":8800"
+
+# Static files directory for web UI
+StaticDir = "/opt/asic-hub/public"
+
+# HTTP response write timeout (optional)
+#WriteTimeout = "40m"
+
+# HTTP request read timeout (optional)
+#ReadTimeout = "1m"
+
+# DenyAccessFromPublicNetworks blocks connections to ASIC-hub web interface
+# from all networks except local network and networks from allow-list above.
+#
+#DenyAccessFromPublicNetworks = true
+
+# PublicNetworksWhitelist is a list of allowed subnets and IPs for connection.
+#
+# This is a string array of IP and subnets. Networks can be set by masks
+# Example: ["54.34.23.12", "54.34.23.13", "23.45.67.0/24"]
+#PublicNetworksWhitelist = []
+
+# Additional HTTP API transport configuration
+#[API]
+# If non-zero, controls the maximum idle (keep-alive) connections to keep per-host.
+# If zero, MaxThreads value is used.
+#MaxIdleConnsPerHost = 10
+
+# Encoding to use for API calls.
+#Codec = "msgpack"
+
+[LocalState]
+# Path for SQLite database with appdata
+DB = "/var/lib/asic-hub/data.db"
+
+# Database backups directory
+BackupsDir = "/var/lib/asic-hub/backups"
+
+
+[ARP]
+# Enable ARP scanner.
+#
+# ARP Scanner scans local network and updates matching between IP and MAC addresses.
+# This allows to keep actual IP address of ASIC even if original IP address was changed.
+#
+# Set to "false" if you use static IP addresses or see a high load on network router.
+EnableScanner = true
+
+# Network scan interval.
+#
+# Scanner will send ARP request to whole network in specified interval.
+#ScanInterval = "30s"
+
+# Network scan delay.
+#
+# Scanner will add delay between each ARP request to smooth out peaks of network activity.
+#ScanDelay = "50ms"
+
+
+# Whole log block is optional.
+# "log" block removal disables file logging.
+[Log]
+
+# Controls debug logging
+#Debug = true
+
+# Log file path
+Path = "/var/log/asic-hub/hub.json"
+
+# Max size for log file before roration
+MaxFileSize = 12
+
+# Max rotated log files count
+MaxBackups = 5
+
+# Max age in days for log file before rotation
+MaxAge = 7
+
+[Monitoring]
+# Max devices count per thread for monitoring (optional).
+# ASIC Hub splits monitored ASICs into chunks and monitors
+# each chunk in a separate thread.
+#
+# MaxGroupSize controls devices count monitored by thread.
+# This value depends on your CPU cores/threads count and
+# monitored devices amount.
+#
+# We recommend to increase this value on big farms, by splitting
+# devices count by CPU core/thread count (Ndev / Nthreads) for best results.
+MaxGroupSize = 30
+
+# AddDelayOnMonitoringStart adds delay before start new monitoring goroutine to smooth out peaks of activity.
+# Delay will be automatically calculated according to devices count and MaxGroupSize param
+#AddDelayOnMonitoringStart = true
+
+# Device stats collection interval (optional).
+# The default value is OK for small farms, but should be increased
+# for big amount of connected ASICS (>500).
+#StatsCollectInterval = "10s"
+
+# StatsCollectTimeout is interval after iteration of stats collection will be aborted
+# Should be less than BufferTTL
+#StatsCollectTimeout = "8m"
+
+# ASIC stats submit interval (optional).
+# We don't recommend specifing values higher than 1m, or you will
+# notice a lot of "device offline" reports in your farm dashboard.
+#StatsSendInterval="15s"
+
+# IP address probe timeout for scan (optional).
+# Increase if you don't see your asics during scan or
+# see any "i/o timeout" errors during scan process.
+#ProbeTimeout = "15s"
+
+# ASIC API request timeout (optional).
+# If ASIC doesn't respond in specified time, ASIC Hub will consider it as offline.
+# Increase the value if you see a lot of "i/o timeout" errors although device is online.
+ConnectTimeout = "10s"
+
+# Ignore mirrors list from server hello response and always use host from config file.
+#IgnoreMirrorsList=false
+
+# Enable bulk stats send
+#EnableBulkStats=true
+
+# Interval after all items in stats queue will be sent
+# to the server even if queue is not filled yet.
+#
+# Works only with EnableBulkStats=true.
+#BufferFillTimeout="15s"
+
+# Interval after gotten stats won't be send to API
+# Works only with EnableBulkStats=true.
+#BufferTTL="10m"
+
+# Size of a stats queue to be sent to the server.
+# Hub collects stats into a queue, and after queue is filled - sends to the server.
+#
+# Works only with EnableBulkStats=true.
+#QueueBufferSize=100
+
+# BulkStatsSendingDelay adds delay before sending bulk stats to smooth out peaks of activity.
+# Works only with EnableBulkStats=true.
+#BulkStatsSendingDelay = 2s
+
+# ASIC Hub service heartbeat send interval (optional)
+#HubHeartbeatInterval="10s"
