@@ -1,4 +1,4 @@
-# Hiveon ASIC hub
+# Unofficial Hiveon ASIC hub Docker image
 
 > https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/installation-linux/
 
