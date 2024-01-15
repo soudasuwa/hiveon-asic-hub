@@ -2,6 +2,18 @@
 
 > https://hiveon.com/knowledge-base/ASIC-Hub/getting_started/installation-linux/
 
+## Docker hub
+
+```
+https://hub.docker.com/r/soudasuwa/hiveon-asic-hub
+```
+
+## Quick start
+
+```
+docker run -p 8800:8800 --env FARM_HASH=PLACE_YOUR_FARM_HASH_HERE_40_CHARS --rm soudasuwa/hiveon-asic-hub
+```
+
 ## Modifications
 
 `install.sh`
