@@ -11,8 +11,10 @@ https://hub.docker.com/r/soudasuwa/hiveon-asic-hub
 ## Quick start
 
 ```
-docker run -p 8800:8800 --env FARM_HASH=PLACE_YOUR_FARM_HASH_HERE_40_CHARS --rm soudasuwa/hiveon-asic-hub
+docker run -p 8800:8800 --rm soudasuwa/hiveon-asic-hub
 ```
+
+And navigate to `http://localhost:8800/`
 
 ## Modifications
 
@@ -47,7 +49,7 @@ docker build --pull --rm -f "Dockerfile" -t hiveon-asic-hub:latest "."
 ### Test
 
 ```
-docker run -p 8800:8800 --env FARM_HASH=PLACE_YOUR_FARM_HASH_HERE_40_CHARS --rm hiveon-asic-hub
+docker run -p 8800:8800 --rm hiveon-asic-hub
 ```
 
 ### Tag
